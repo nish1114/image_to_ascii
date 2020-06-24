@@ -1,23 +1,22 @@
 import PIL.Image
 
-ASCII_CHARACTERS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "."]
+CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "."]
 
 
 def change_image_size(image,new_width=100):
-	width,height=image.size
-	hw_ratio=height/width
-	new_height=int(new_width*hw_ratio)
+	w,h=image.size
+	new_height=int(new_width*(h/w))
 	changed_image_size=image.resize((new_width,new_height))
 	return(changed_image_size)
 
 def turn_image_to_grey(image):
-	grayscale_image=image.convert("L")
-	return(grayscale_image)
+	gi=image.convert("L")
+	return(gi)
 
 def conversion_of_pixels_to_ascii(image):
 	pixels=image.getdata()
-	characters = "".join([ASCII_CHARACTERS[pixel//25] for pixel in pixels])
-	return(characters)
+	chars= "".join([CHARS[pixel//25] for pixel in pixels])
+	return(chars)
 
 
 
@@ -34,6 +33,6 @@ def main(new_width=100):
 
 	print(ascii_image)
 
-	with open("ascii_image_file.txt","w") as f:
+	with open("image_file.txt","w") as f:
 		f.write(ascii_image)
 main()
